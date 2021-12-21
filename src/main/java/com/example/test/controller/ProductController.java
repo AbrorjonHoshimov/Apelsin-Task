@@ -1,0 +1,50 @@
+package com.example.test.controller;
+
+import com.example.test.entity.Category;
+import com.example.test.entity.Product;
+import com.example.test.payload.ApiResponse;
+import com.example.test.payload.ProductDto;
+import com.example.test.service.CategoryService;
+import com.example.test.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/product")
+public class ProductController {
+    @Autowired
+    ProductService productService;
+
+    @PostMapping("/add")
+    public HttpEntity<?> addProduct(@RequestBody ProductDto productDto) {
+        ApiResponse apiResponse = productService.add(productDto);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 201 : 409).body(apiResponse);
+    }
+
+    @PutMapping("/edit/{id}")
+    public HttpEntity<?> editProduct(@PathVariable int id, @RequestBody ProductDto productDto) {
+        ApiResponse apiResponse = productService.editProduct(id, productDto);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 201 : 409).body(apiResponse);
+    }
+
+    @GetMapping("/list")
+    public HttpEntity<?> getAll() {
+        List<Product> all = productService.getAll();
+        return ResponseEntity.ok(all);
+    }
+    @GetMapping("/getOne/{id}")
+    public HttpEntity<?>getOne(@PathVariable int id){
+        ApiResponse apiResponse = productService.getOne(id);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+    }
+    @DeleteMapping("/{id}")
+    public HttpEntity<?>deleteProduct(@PathVariable int id){
+        ApiResponse apiResponse = productService.deleteProduct(id);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+    }
+
+}
