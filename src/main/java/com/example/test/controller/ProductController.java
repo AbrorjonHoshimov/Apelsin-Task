@@ -36,15 +36,35 @@ public class ProductController {
         List<Product> all = productService.getAll();
         return ResponseEntity.ok(all);
     }
+
     @GetMapping("/getOne/{id}")
-    public HttpEntity<?>getOne(@PathVariable int id){
+    public HttpEntity<?> getOne(@PathVariable int id) {
         ApiResponse apiResponse = productService.getOne(id);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
+
     @DeleteMapping("/{id}")
-    public HttpEntity<?>deleteProduct(@PathVariable int id){
+    public HttpEntity<?> deleteProduct(@PathVariable int id) {
         ApiResponse apiResponse = productService.deleteProduct(id);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+    }
+
+    @GetMapping("/{id}")
+    public HttpEntity<?> infoProductByCustomerId(@RequestParam int id) {
+        ApiResponse apiResponse = productService.infoProductCustomerId(id);
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    @GetMapping("/moreProductTen")
+    public HttpEntity<?> getProductMoreTen() {
+        ApiResponse apiResponse = productService.moreTen();
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    @GetMapping("/quantityEight")
+    public HttpEntity<?> getProductQuantityEight() {
+        ApiResponse apiResponse = productService.getProductQuantityEight();
+        return ResponseEntity.ok(apiResponse);
     }
 
 }

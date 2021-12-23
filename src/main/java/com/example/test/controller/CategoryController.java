@@ -33,16 +33,23 @@ public class CategoryController {
         List<Category> categoryList = categoryService.getAll();
         return ResponseEntity.ok(categoryList);
     }
+
     @GetMapping("/getOne/{id}")
-    public ResponseEntity<?> getOneCategory(@PathVariable int id){
+    public ResponseEntity<?> getOneCategory(@PathVariable int id) {
         ApiResponse apiResponse = categoryService.getOne(id);
-        return ResponseEntity.status(apiResponse.isSuccess()?200:409).body(apiResponse);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteCategory(@PathVariable int id){
+    public ResponseEntity<?> deleteCategory(@PathVariable int id) {
         ApiResponse apiResponse = categoryService.deleteCategory(id);
-        return ResponseEntity.status(apiResponse.isSuccess()?200:409).body(apiResponse);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
 
     }
 
+    @GetMapping("/productId")
+    private HttpEntity<?> getCategoryProductId(@RequestParam Integer id) {
+        ApiResponse apiResponse = categoryService.getCategoryProductId(id);
+        return ResponseEntity.ok(apiResponse);
+    }
 }

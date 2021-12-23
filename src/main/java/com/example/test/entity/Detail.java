@@ -6,7 +6,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
 @EqualsAndHashCode(callSuper = true)
@@ -15,7 +17,7 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor
 @Data
 public class Detail extends AbstractId {
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Order order;
     @ManyToOne
     private Product product;
