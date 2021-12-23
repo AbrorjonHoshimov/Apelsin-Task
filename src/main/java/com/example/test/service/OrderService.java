@@ -92,4 +92,9 @@ public class OrderService {
         List<?> detailsByOrderId = orderRepository.getDetailsByOrderId(id);
         return new ApiResponse("Success", true, detailsByOrderId);
     }
+
+    public ApiResponse getAllOrderByDate(Date dateFrom, Date dateTo) {
+        List<Order> allByDateBetween = orderRepository.findAllByDateBetween(dateFrom, dateTo);
+        return new ApiResponse("Success",true,allByDateBetween);
+    }
 }

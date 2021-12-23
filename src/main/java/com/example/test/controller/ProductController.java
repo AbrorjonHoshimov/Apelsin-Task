@@ -66,5 +66,10 @@ public class ProductController {
         ApiResponse apiResponse = productService.getProductQuantityEight();
         return ResponseEntity.ok(apiResponse);
     }
+    @GetMapping("/getTenExpensive")
+    public HttpEntity<?> getTenExpensive(){
+        ApiResponse apiResponse = productService.getTenProductExpensive();
+        return ResponseEntity.ok(apiResponse);
+    }
 
 }

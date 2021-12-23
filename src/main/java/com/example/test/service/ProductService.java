@@ -95,4 +95,9 @@ public class ProductService {
         List<?> allInfo = productRepository.getAllInfo(id);
         return new ApiResponse("Success", true, allInfo);
     }
+
+    public ApiResponse getTenProductExpensive() {
+        List<?> tenExpensive = productRepository.getTenProductExpensive();
+        return new ApiResponse("Success",true,tenExpensive);
+    }
 }

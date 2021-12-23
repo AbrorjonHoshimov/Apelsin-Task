@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order,Integer> {
-
+    List <Order> findAllByDateBetween(Date from, Date to);
     @Query(value = "SELECT * FROM orders u WHERE u.customer_id =:id",
             nativeQuery = true)
     List<Order> findAllBy(@Param("id") int id);

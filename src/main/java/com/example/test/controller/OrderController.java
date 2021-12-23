@@ -43,6 +43,11 @@ public class OrderController {
         ApiResponse apiResponse = orderService.deleteOrder(id);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
+    @GetMapping("/byDate")
+    public HttpEntity<?>getAllOrderByDate(@RequestParam Date dateFrom,@RequestParam Date dateTo){
+        ApiResponse apiResponse = orderService.getAllOrderByDate(dateFrom,dateTo);
+        return ResponseEntity.ok(apiResponse);
+    }
 
     @GetMapping("/getOrder")
     public HttpEntity<?> getOrder(@RequestParam int id) {
@@ -67,5 +72,6 @@ public class OrderController {
         ApiResponse apiResponse = orderService.getDetailOrder(id);
         return ResponseEntity.ok(apiResponse);
     }
+
 
 }
